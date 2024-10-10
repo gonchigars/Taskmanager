@@ -189,6 +189,24 @@ This exercise provides a hands-on way to understand the flow of a drag and drop 
 
 Step by Step Explanation:
 
+sequenceDiagram
+    participant TC as TaskCard
+    participant SC as Source Column (Todo)
+    participant TC as Target Column (In Progress)
+    participant KB as KanbanBoard
+
+    TC->>TC: User starts dragging
+    TC->>SC: Notify leaving
+    TC->>TC: Update visual feedback
+    TC->>TC: User drags over target
+    TC->>TC: User releases mouse
+    TC->>TC: onDragEnd triggered
+    TC->>KB: Call handleDrop
+    KB->>KB: Update tasks state
+    KB->>SC: Re-render (task removed)
+    KB->>TC: Re-render (task added)
+    KB->>TC: Update visual state
+
 # Drag and Drop Sequence Explained with Code
 
 Let's go through the sequence diagram step by step, showing the relevant code for each action:
